@@ -18,7 +18,7 @@ function Activities({ apiBaseUrl }) {
       try {
         setLoading(true)
         setError('')
-        const response = await fetch(`${apiBaseUrl}/activities/`)
+        const response = await fetch(`${apiBaseUrl}/api/activities/`)
         if (!response.ok) throw new Error('Failed to fetch activities')
         const payload = await response.json()
         setActivities(normalizeListResponse(payload))

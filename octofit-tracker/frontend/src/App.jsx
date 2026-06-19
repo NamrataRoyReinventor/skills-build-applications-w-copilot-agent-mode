@@ -9,8 +9,8 @@ import './App.css'
 function App() {
   const codespaceName = import.meta.env.VITE_CODESPACE_NAME
   const apiBaseUrl = codespaceName?.trim()
-    ? `https://${codespaceName}-8000.app.github.dev/api`
-    : 'http://localhost:8000/api'
+    ? `https://${codespaceName}-8000.app.github.dev`
+    : 'http://localhost:8000'
 
   return (
     <div className="app-shell">

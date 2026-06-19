@@ -18,7 +18,7 @@ function Teams({ apiBaseUrl }) {
       try {
         setLoading(true)
         setError('')
-        const response = await fetch(`${apiBaseUrl}/teams/`)
+        const response = await fetch(`${apiBaseUrl}/api/teams/`)
         if (!response.ok) throw new Error('Failed to fetch teams')
         const payload = await response.json()
         setTeams(normalizeListResponse(payload))

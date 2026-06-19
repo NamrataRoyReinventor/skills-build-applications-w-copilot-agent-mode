@@ -18,7 +18,7 @@ function Workouts({ apiBaseUrl }) {
       try {
         setLoading(true)
         setError('')
-        const response = await fetch(`${apiBaseUrl}/workouts/`)
+        const response = await fetch(`${apiBaseUrl}/api/workouts/`)
         if (!response.ok) throw new Error('Failed to fetch workouts')
         const payload = await response.json()
         setWorkouts(normalizeListResponse(payload))

@@ -18,7 +18,7 @@ function Leaderboard({ apiBaseUrl }) {
       try {
         setLoading(true)
         setError('')
-        const response = await fetch(`${apiBaseUrl}/leaderboard/`)
+        const response = await fetch(`${apiBaseUrl}/api/leaderboard/`)
         if (!response.ok) throw new Error('Failed to fetch leaderboard')
         const payload = await response.json()
         setEntries(normalizeListResponse(payload))

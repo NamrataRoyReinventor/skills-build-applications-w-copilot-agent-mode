@@ -18,7 +18,7 @@ function Users({ apiBaseUrl }) {
       try {
         setLoading(true)
         setError('')
-        const response = await fetch(`${apiBaseUrl}/users/`)
+        const response = await fetch(`${apiBaseUrl}/api/users/`)
         if (!response.ok) throw new Error('Failed to fetch users')
         const payload = await response.json()
         setUsers(normalizeListResponse(payload))
