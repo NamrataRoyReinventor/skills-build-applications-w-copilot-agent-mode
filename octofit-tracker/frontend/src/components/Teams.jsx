@@ -12,13 +12,17 @@ function Teams({ apiBaseUrl }) {
   const [teams, setTeams] = useState([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState('')
+  const codespaceEndpoint = `https://${import.meta.env.VITE_CODESPACE_NAME}-8000.app.github.dev/api/teams/`
+  const endpoint = import.meta.env.VITE_CODESPACE_NAME?.trim()
+    ? codespaceEndpoint
+    : `${apiBaseUrl}/api/teams/`
 
   useEffect(() => {
     const fetchTeams = async () => {
       try {
         setLoading(true)
         setError('')
-        const response = await fetch(`${apiBaseUrl}/api/teams/`)
+        const response = await fetch(endpoint)
         if (!response.ok) throw new Error('Failed to fetch teams')
         const payload = await response.json()
         setTeams(normalizeListResponse(payload))
@@ -30,7 +34,7 @@ function Teams({ apiBaseUrl }) {
     }
 
     fetchTeams()
-  }, [apiBaseUrl])
+  }, [endpoint])
 
   return (
     <section>

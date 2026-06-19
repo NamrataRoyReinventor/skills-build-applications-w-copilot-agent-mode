@@ -12,13 +12,17 @@ function Activities({ apiBaseUrl }) {
   const [activities, setActivities] = useState([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState('')
+  const codespaceEndpoint = `https://${import.meta.env.VITE_CODESPACE_NAME}-8000.app.github.dev/api/activities/`
+  const endpoint = import.meta.env.VITE_CODESPACE_NAME?.trim()
+    ? codespaceEndpoint
+    : `${apiBaseUrl}/api/activities/`
 
   useEffect(() => {
     const fetchActivities = async () => {
       try {
         setLoading(true)
         setError('')
-        const response = await fetch(`${apiBaseUrl}/api/activities/`)
+        const response = await fetch(endpoint)
         if (!response.ok) throw new Error('Failed to fetch activities')
         const payload = await response.json()
         setActivities(normalizeListResponse(payload))
@@ -30,7 +34,7 @@ function Activities({ apiBaseUrl }) {
     }
 
     fetchActivities()
-  }, [apiBaseUrl])
+  }, [endpoint])
 
   return (
     <section>

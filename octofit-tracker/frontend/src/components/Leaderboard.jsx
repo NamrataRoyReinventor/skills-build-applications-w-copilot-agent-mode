@@ -12,13 +12,17 @@ function Leaderboard({ apiBaseUrl }) {
   const [entries, setEntries] = useState([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState('')
+  const codespaceEndpoint = `https://${import.meta.env.VITE_CODESPACE_NAME}-8000.app.github.dev/api/leaderboard/`
+  const endpoint = import.meta.env.VITE_CODESPACE_NAME?.trim()
+    ? codespaceEndpoint
+    : `${apiBaseUrl}/api/leaderboard/`
 
   useEffect(() => {
     const fetchLeaderboard = async () => {
       try {
         setLoading(true)
         setError('')
-        const response = await fetch(`${apiBaseUrl}/api/leaderboard/`)
+        const response = await fetch(endpoint)
         if (!response.ok) throw new Error('Failed to fetch leaderboard')
         const payload = await response.json()
         setEntries(normalizeListResponse(payload))
@@ -30,7 +34,7 @@ function Leaderboard({ apiBaseUrl }) {
     }
 
     fetchLeaderboard()
-  }, [apiBaseUrl])
+  }, [endpoint])
 
   return (
     <section>
